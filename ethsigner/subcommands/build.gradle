@@ -1,6 +1,6 @@
 
 jar {
-  archiveBaseName = 'ethsigner-commandline'
+  archiveBaseName = 'ethsigner-subcommands'
   manifest {
     attributes(
       'Specification-Title': archiveBaseName,
@@ -13,16 +13,23 @@ jar {
 
 dependencies {
 
+  implementation project(':ethsigner:commandline')
   implementation project(':ethsigner:core')
+
   implementation 'tech.pegasys.signers.internal:signing-secp256k1-api'
   implementation 'tech.pegasys.signers.internal:signing-secp256k1-impl'
+  implementation 'tech.pegasys.signers.internal:keystorage-hashicorp'
+
   implementation 'info.picocli:picocli'
   implementation 'com.google.guava:guava'
+  implementation 'io.vertx:vertx-core'
+  implementation 'org.web3j:core'
+
   implementation 'org.apache.logging.log4j:log4j-api'
   implementation 'org.apache.logging.log4j:log4j-core'
-
   runtimeOnly 'org.apache.logging.log4j:log4j-slf4j-impl'
 
+  testImplementation project(path: ':ethsigner:commandline', configuration: 'testSupportArtifacts')
   testImplementation 'org.junit.jupiter:junit-jupiter-api'
   testImplementation 'org.junit.jupiter:junit-jupiter-params'
   testImplementation 'org.assertj:assertj-core'
